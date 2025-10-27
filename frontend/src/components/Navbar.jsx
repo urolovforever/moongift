@@ -14,7 +14,7 @@ function Navbar() {
   ];
 
   return (
-    <nav className="bg-primary-800 shadow-lg sticky top-0 z-50">
+    <nav className="bg-primary-600 shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center">
@@ -27,7 +27,7 @@ function Navbar() {
                 key={link.path}
                 to={link.path}
                 className={`transition-colors ${
-                  isActive(link.path) ? 'text-accent-400 font-semibold' : 'text-white hover:text-accent-300'
+                  isActive(link.path) ? 'text-accent-500 font-semibold' : 'text-white hover:text-secondary-300'
                 }`}
               >
                 {link.label}
@@ -54,7 +54,7 @@ function Navbar() {
                 to={link.path}
                 onClick={() => setIsOpen(false)}
                 className={`block px-4 py-2 rounded-md ${
-                  isActive(link.path) ? 'bg-primary-700 text-accent-400 font-semibold' : 'text-white hover:bg-primary-700'
+                  isActive(link.path) ? 'bg-primary-700 text-accent-500 font-semibold' : 'text-white hover:bg-primary-700'
                 }`}
               >
                 {link.label}
