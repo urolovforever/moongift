@@ -14,7 +14,7 @@ function Navbar() {
   ];
 
   return (
-    <nav className="bg-primary shadow-premium-lg sticky top-0 z-50 border-b-2 border-primary-700">
+    <nav className="bg-primary shadow-soft-lg sticky top-0 z-50 border-b-2 border-primary-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-18">
           <Link to="/" className="flex items-center">
