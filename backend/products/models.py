@@ -33,6 +33,7 @@ class Product(models.Model):
     image_2 = models.ImageField(upload_to='products/', blank=True, null=True, verbose_name="Rasm 2")
     image_3 = models.ImageField(upload_to='products/', blank=True, null=True, verbose_name="Rasm 3")
     uzum_link = models.URLField(verbose_name="Uzum Market havola")
+    yandex_market_link = models.URLField(blank=True, null=True, verbose_name="Yandex Market havola")
     is_featured = models.BooleanField(default=False, verbose_name="Mashhur")
     is_active = models.BooleanField(default=True, verbose_name="Faol")
     created_at = models.DateTimeField(auto_now_add=True)
