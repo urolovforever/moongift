@@ -51,11 +51,18 @@ function ProductDetail() {
 
         <div>
           <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-          <p className="text-3xl font-bold text-wood-700 mb-6">{formatPrice(product.price)} so'm</p>
+          <p className="text-3xl font-bold text-red-700 mb-6">{formatPrice(product.price)} so'm</p>
           <p className="text-gray-700 mb-6">{product.description}</p>
-          <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-wood-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-wood-700">
-            Uzum Market'da xarid qilish
-          </a>
+          <div className="space-y-3">
+            <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-red-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-red-700">
+              Uzum Market'da xarid qilish
+            </a>
+            {product.yandex_market_link && (
+              <a href={product.yandex_market_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-red-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-red-700">
+                Yandex Market'da xarid qilish
+              </a>
+            )}
+          </div>
         </div>
       </div>
 
