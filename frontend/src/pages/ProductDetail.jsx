@@ -50,16 +50,16 @@ function ProductDetail() {
         </div>
 
         <div>
-          <h1 className="text-3xl font-bold text-primary-600 mb-4">{product.name}</h1>
-          <p className="text-3xl font-bold text-accent-500 mb-6">{formatPrice(product.price)} so'm</p>
-          <p className="text-gray-700 mb-6">{product.description}</p>
+          <h1 className="text-4xl font-bold text-text-main mb-4">{product.name}</h1>
+          <p className="text-4xl font-bold text-accent mb-6">{formatPrice(product.price)} so'm</p>
+          <p className="text-lg text-text-secondary mb-8 leading-relaxed">{product.description}</p>
           <div className="space-y-3">
-            <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-accent-500 text-white text-center py-3 rounded-lg font-semibold hover:bg-accent-600 transition-colors shadow-md">
-              Uzum Market'da xarid qilish
+            <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-primary text-white text-center py-4 rounded-button font-semibold text-lg hover:bg-accent transition-colors shadow-premium-lg">
+              Buyurtma berish (Uzum Market)
             </a>
             {product.yandex_market_link && (
-              <a href={product.yandex_market_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-secondary-300 text-white text-center py-3 rounded-lg font-semibold hover:bg-secondary-400 transition-colors shadow-md">
-                Yandex Market'da xarid qilish
+              <a href={product.yandex_market_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-secondary text-white text-center py-4 rounded-button font-semibold text-lg hover:bg-secondary-400 transition-colors shadow-premium">
+                Batafsil ko'rish (Yandex Market)
               </a>
             )}
           </div>
@@ -68,7 +68,7 @@ function ProductDetail() {
 
       {product.similar_products && product.similar_products.length > 0 && (
         <div className="mt-16">
-          <h2 className="text-2xl font-bold text-primary-600 mb-6">O'xshash mahsulotlar</h2>
+          <h2 className="text-3xl font-bold text-text-main mb-8">O'xshash mahsulotlar</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {product.similar_products.map((p) => (
               <ProductCard key={p.id} product={p} />
