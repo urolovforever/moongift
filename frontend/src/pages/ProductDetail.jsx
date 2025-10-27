@@ -50,15 +50,15 @@ function ProductDetail() {
         </div>
 
         <div>
-          <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-          <p className="text-3xl font-bold text-red-700 mb-6">{formatPrice(product.price)} so'm</p>
+          <h1 className="text-3xl font-bold text-primary-800 mb-4">{product.name}</h1>
+          <p className="text-3xl font-bold text-accent-600 mb-6">{formatPrice(product.price)} so'm</p>
           <p className="text-gray-700 mb-6">{product.description}</p>
           <div className="space-y-3">
-            <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-red-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-red-700">
+            <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-accent-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-accent-700 transition-colors">
               Uzum Market'da xarid qilish
             </a>
             {product.yandex_market_link && (
-              <a href={product.yandex_market_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-red-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-red-700">
+              <a href={product.yandex_market_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-primary-700 text-white text-center py-3 rounded-lg font-semibold hover:bg-primary-800 transition-colors">
                 Yandex Market'da xarid qilish
               </a>
             )}
@@ -68,7 +68,7 @@ function ProductDetail() {
 
       {product.similar_products && product.similar_products.length > 0 && (
         <div className="mt-16">
-          <h2 className="text-2xl font-bold mb-6">O'xshash mahsulotlar</h2>
+          <h2 className="text-2xl font-bold text-primary-800 mb-6">O'xshash mahsulotlar</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {product.similar_products.map((p) => (
               <ProductCard key={p.id} product={p} />
