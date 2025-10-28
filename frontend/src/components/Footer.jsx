@@ -6,7 +6,10 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
           <div>
-            <h3 className="text-3xl font-bold text-primary mb-4">🌙 MoonGift</h3>
+            <div className="flex items-center gap-3 justify-center md:justify-start mb-4">
+              <img src="/logo.png" alt="MoonGift Logo" className="h-10 w-10 object-contain" />
+              <h3 className="text-3xl font-bold text-primary">MoonGift</h3>
+            </div>
             <p className="text-text-secondary text-base leading-relaxed">
               Lazer texnologiyasi yordamida yog'och va boshqa materiallarga yuqori sifatli ishlov berish.
             </p>
