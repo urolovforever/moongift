@@ -26,17 +26,17 @@ function Home() {
 
   return (
     <div>
-      {/* Banner section - Navbar ostida ko'rsatiladigan banner */}
-      <section className="relative w-full">
-        <img
-          src="/banner.jpg"
-          alt="MoonGift Banner"
-          className="w-full h-48 md:h-64 lg:h-80 object-cover"
-        />
-      </section>
+      {/* Hero section with background image */}
+      <section className="relative bg-primary py-20 md:py-32" style={{
+        backgroundImage: 'url(/hero-bg.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50"></div>
 
-      <section className="relative bg-gradient-to-br from-primary via-primary-600 to-primary-700 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-5">
               MoonGift
