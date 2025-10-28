@@ -14,11 +14,11 @@ function Navbar() {
   ];
 
   return (
-    <nav className="bg-primary shadow-soft-lg sticky top-0 z-50 border-b-2 border-primary-700">
+    <nav className="bg-white shadow-soft-lg sticky top-0 z-50 border-b-2 border-border-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-18">
           <Link to="/" className="flex items-center">
-            <span className="text-3xl font-bold text-white tracking-tight">🌙 MoonGift</span>
+            <span className="text-3xl font-bold text-primary tracking-tight">🌙 MoonGift</span>
           </Link>
 
           <div className="hidden md:flex space-x-10">
@@ -27,7 +27,7 @@ function Navbar() {
                 key={link.path}
                 to={link.path}
                 className={`transition-colors text-base font-semibold ${
-                  isActive(link.path) ? 'text-accent' : 'text-white hover:text-secondary'
+                  isActive(link.path) ? 'text-accent' : 'text-text-primary hover:text-accent'
                 }`}
               >
                 {link.label}
@@ -35,7 +35,7 @@ function Navbar() {
             ))}
           </div>
 
-          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 rounded-button text-white hover:bg-primary-700 transition-colors">
+          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 rounded-button text-primary hover:bg-surface-light transition-colors">
             <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               {isOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -54,7 +54,7 @@ function Navbar() {
                 to={link.path}
                 onClick={() => setIsOpen(false)}
                 className={`block px-5 py-3 rounded-button font-semibold transition-colors ${
-                  isActive(link.path) ? 'bg-primary-700 text-accent' : 'text-white hover:bg-primary-700'
+                  isActive(link.path) ? 'bg-surface-light text-accent' : 'text-text-primary hover:bg-surface-light'
                 }`}
               >
                 {link.label}
