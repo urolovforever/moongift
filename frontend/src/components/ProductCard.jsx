@@ -23,13 +23,24 @@ function ProductCard({ product }) {
         <Link to={`/products/${product.slug}`}>
           <h3 className="text-lg font-semibold text-primary mb-2 hover:text-primary-700 transition-colors">{product.name}</h3>
         </Link>
-        <p className="text-2xl font-bold text-accent mb-4">{formatPrice(product.price)} so'm</p>
-        <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="w-full bg-primary text-white py-3 px-5 rounded-button hover:bg-primary-700 transition-colors flex items-center justify-center font-semibold text-base shadow-soft">
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          Buyurtma berish
-        </a>
+        {product.discount_percentage > 0 ? (
+          <div className="mb-4">
+            <p className="text-sm text-text-secondary line-through">{formatPrice(product.price)} so'm</p>
+            <p className="text-2xl font-bold text-accent">{formatPrice(product.price * (1 - product.discount_percentage / 100))} so'm</p>
+          </div>
+        ) : (
+          <p className="text-2xl font-bold text-accent mb-4">{formatPrice(product.price)} so'm</p>
+        )}
+        <div className="space-y-2">
+          <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-primary text-white py-2.5 px-4 rounded-button hover:bg-primary-700 transition-colors text-center font-semibold text-sm shadow-soft">
+            Uzum Market
+          </a>
+          {product.yandex_market_link && (
+            <a href={product.yandex_market_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-accent text-white py-2.5 px-4 rounded-button hover:bg-accent/80 transition-colors text-center font-semibold text-sm shadow-soft">
+              Yandex Market
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );
