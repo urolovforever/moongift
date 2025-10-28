@@ -17,7 +17,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Product
-        fields = ['id', 'name', 'slug', 'category', 'category_name', 'price', 'image', 'uzum_link', 'is_featured']
+        fields = ['id', 'name', 'slug', 'category', 'category_name', 'price', 'image', 'uzum_link', 'yandex_market_link', 'discount_percentage', 'is_featured']
 
 
 class ProductDetailSerializer(serializers.ModelSerializer):
@@ -26,9 +26,9 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Product
-        fields = ['id', 'name', 'slug', 'category', 'category_name', 'description', 'price', 
-                  'material', 'dimensions', 'image', 'image_2', 'image_3', 'uzum_link', 
-                  'created_at', 'similar_products']
+        fields = ['id', 'name', 'slug', 'category', 'category_name', 'description', 'price',
+                  'material', 'dimensions', 'image', 'image_2', 'image_3', 'uzum_link', 'yandex_market_link',
+                  'discount_percentage', 'is_featured', 'created_at', 'similar_products']
     
     def get_similar_products(self, obj):
         similar = Product.objects.filter(category=obj.category, is_active=True).exclude(id=obj.id)[:4]
