@@ -8,6 +8,11 @@ function ProductCard({ product }) {
       <Link to={`/products/${product.slug}`}>
         <div className="relative overflow-hidden h-64">
           <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          {product.discount_percentage > 0 && (
+            <span className="absolute top-3 left-3 bg-accent text-white text-xs px-3 py-1.5 rounded-button font-bold shadow-soft">
+              -{product.discount_percentage}% 🏷️
+            </span>
+          )}
           {product.is_featured && (
             <span className="absolute top-3 right-3 bg-gold text-white text-xs px-3 py-1.5 rounded-button font-bold shadow-soft">⭐ Mashhur</span>
           )}

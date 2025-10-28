@@ -37,7 +37,14 @@ function ProductDetail() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div>
-          <img src={selectedImage} alt={product.name} className="w-full h-96 object-cover rounded-card mb-4 shadow-soft-md" />
+          <div className="relative">
+            <img src={selectedImage} alt={product.name} className="w-full h-96 object-cover rounded-card mb-4 shadow-soft-md" />
+            {product.discount_percentage > 0 && (
+              <span className="absolute top-4 left-4 bg-accent text-white text-sm px-4 py-2 rounded-button font-bold shadow-soft-md">
+                -{product.discount_percentage}% CHEGIRMA 🏷️
+              </span>
+            )}
+          </div>
           {images.length > 1 && (
             <div className="grid grid-cols-3 gap-4">
               {images.map((img, index) => (
@@ -51,7 +58,17 @@ function ProductDetail() {
 
         <div>
           <h1 className="text-4xl font-bold text-text-primary mb-4">{product.name}</h1>
-          <p className="text-4xl font-bold text-accent mb-6">{formatPrice(product.price)} so'm</p>
+          {product.discount_percentage > 0 ? (
+            <div className="mb-6">
+              <p className="text-2xl text-text-secondary line-through">{formatPrice(product.price)} so'm</p>
+              <p className="text-4xl font-bold text-accent">{formatPrice(product.price * (1 - product.discount_percentage / 100))} so'm</p>
+              <span className="inline-block mt-2 bg-accent-50 text-accent px-3 py-1 rounded-button text-sm font-bold">
+                {formatPrice(product.price * (product.discount_percentage / 100))} so'm tejaysiz!
+              </span>
+            </div>
+          ) : (
+            <p className="text-4xl font-bold text-accent mb-6">{formatPrice(product.price)} so'm</p>
+          )}
           <p className="text-lg text-text-secondary mb-8 leading-relaxed">{product.description}</p>
           <div className="space-y-3">
             <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-primary text-white text-center py-4 rounded-button font-semibold text-lg hover:bg-primary-700 transition-colors shadow-soft-md">
