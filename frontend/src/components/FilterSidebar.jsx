@@ -55,7 +55,7 @@ function FilterSidebar({
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-bold text-wood-800">Filterlar</h2>
+            <h2 className="text-xl font-bold text-text-primary">Filterlar</h2>
             <p className="text-sm text-gray-600">{resultCount} ta mahsulot</p>
           </div>
           <button
@@ -73,17 +73,17 @@ function FilterSidebar({
         <div className="p-6 space-y-6">
           {/* Kategoriya */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
+            <label className="block text-sm font-bold text-text-primary mb-3">
               📦 Kategoriya
             </label>
             <div className="space-y-2">
               <button
                 type="button"
                 onClick={() => onCategoryChange(null)}
-                className={`w-full text-left px-4 py-3 rounded-lg text-sm transition-all ${
+                className={`w-full text-left px-4 py-3 rounded-lg text-sm font-semibold transition-all ${
                   !selectedCategory
-                    ? 'bg-wood-600 text-white shadow-md'
-                    : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
+                    ? 'bg-primary text-white shadow-soft-md'
+                    : 'bg-surface-light text-text-primary hover:bg-surface-gray'
                 }`}
               >
                 Barchasi
@@ -93,10 +93,10 @@ function FilterSidebar({
                   key={category.id}
                   type="button"
                   onClick={() => onCategoryChange(category.slug)}
-                  className={`w-full text-left px-4 py-3 rounded-lg text-sm transition-all flex items-center justify-between ${
+                  className={`w-full text-left px-4 py-3 rounded-lg text-sm font-semibold transition-all flex items-center justify-between ${
                     selectedCategory === category.slug
-                      ? 'bg-wood-600 text-white shadow-md'
-                      : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
+                      ? 'bg-primary text-white shadow-soft-md'
+                      : 'bg-surface-light text-text-primary hover:bg-surface-gray'
                   }`}
                 >
                   <span>{category.name}</span>
@@ -114,7 +114,7 @@ function FilterSidebar({
 
           {/* Narx Oralig'i */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
+            <label className="block text-sm font-bold text-text-primary mb-3">
               💰 Narx Oralig'i
             </label>
             <div className="space-y-3">
@@ -125,7 +125,7 @@ function FilterSidebar({
                   placeholder="0"
                   value={priceRange.min}
                   onChange={(e) => onPriceChange({ ...priceRange, min: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-wood-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all text-text-primary"
                 />
               </div>
               <div>
@@ -135,7 +135,7 @@ function FilterSidebar({
                   placeholder="1000000"
                   value={priceRange.max}
                   onChange={(e) => onPriceChange({ ...priceRange, max: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-wood-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all text-text-primary"
                 />
               </div>
             </div>
@@ -143,13 +143,13 @@ function FilterSidebar({
 
           {/* Sortlash */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
+            <label className="block text-sm font-bold text-text-primary mb-3">
               🔄 Saralash
             </label>
             <select
               value={sortBy}
               onChange={(e) => onSortChange(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-wood-500 focus:border-transparent appearance-none bg-white"
+              className="w-full px-4 py-2 border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all appearance-none bg-white text-text-primary font-medium"
             >
               <option value="">Standart</option>
               <option value="price_asc">💵 Narx: Arzondan qimmatga</option>
@@ -166,13 +166,13 @@ function FilterSidebar({
         <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4 space-y-2">
           <button
             onClick={onReset}
-            className="w-full px-4 py-3 bg-gray-100 text-gray-700 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
+            className="w-full px-4 py-3 bg-surface-light text-text-primary rounded-lg font-semibold hover:bg-surface-gray transition-colors"
           >
             🗑️ Filterlarni tozalash
           </button>
           <button
             onClick={onClose}
-            className="w-full px-4 py-3 bg-wood-600 text-white rounded-lg font-semibold hover:bg-wood-700 transition-colors"
+            className="w-full px-4 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-700 transition-colors shadow-soft-md"
           >
             Natijalarni ko'rish
           </button>
