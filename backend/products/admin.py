@@ -19,7 +19,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['image_preview', 'name', 'category', 'formatted_price', 'is_featured', 'is_active', 'created_at']
+    list_display = ['image_preview', 'name', 'category', 'formatted_price', 'discount_badge', 'is_featured', 'is_active', 'created_at']
     list_filter = ['category', 'is_featured', 'is_active', 'created_at']
     search_fields = ['name', 'description', 'material']
     prepopulated_fields = {'slug': ('name',)}
@@ -36,12 +36,17 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('price', 'material', 'dimensions'),
             'classes': ('wide',)
         }),
+        ('🏷️ Chegirma', {
+            'fields': ('discount_percentage',),
+            'classes': ('wide',),
+            'description': 'Chegirma foizini kiriting (0-100 oralig\'ida)'
+        }),
         ('🖼️ Rasmlar', {
             'fields': ('image', 'image_2', 'image_3'),
             'classes': ('wide',)
         }),
-        ('🛒 Uzum Market', {
-            'fields': ('uzum_link',),
+        ('🛒 Savdo Maydonchalari', {
+            'fields': ('uzum_link', 'yandex_market_link'),
             'classes': ('wide',)
         }),
         ('⚙️ Status', {
@@ -70,6 +75,17 @@ class ProductAdmin(admin.ModelAdmin):
 
     formatted_price.short_description = 'Narx'
     formatted_price.admin_order_field = 'price'
+
+    def discount_badge(self, obj):
+        if obj.discount_percentage > 0:
+            return format_html(
+                '<span style="background: #ff3b3f; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;">-{}%</span>',
+                obj.discount_percentage
+            )
+        return format_html('<span style="color: #999;">-</span>')
+
+    discount_badge.short_description = 'Chegirma'
+    discount_badge.admin_order_field = 'discount_percentage'
 
     # Rasm yuklanganda avtomatik preview
     readonly_fields = ['image_preview_large']
