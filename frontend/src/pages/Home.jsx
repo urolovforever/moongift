@@ -48,33 +48,33 @@ function Home() {
 
       <section className="py-16 bg-surface-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6">
-              <div className="bg-accent-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-soft">
-                <svg className="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="grid grid-cols-3 md:grid-cols-3 gap-4">
+            <div className="text-center p-2">
+              <div className="bg-accent-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2 shadow-soft">
+                <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-text-primary mb-2">Yuqori Sifat</h3>
-              <p className="text-sm text-text-secondary">Har bir mahsulot diqqat bilan ishlab chiqiladi</p>
+              <h3 className="text-sm md:text-lg font-semibold text-text-primary mb-1 md:mb-2">Yuqori Sifat</h3>
+              <p className="text-xs md:text-sm text-text-secondary hidden md:block">Har bir mahsulot diqqat bilan ishlab chiqiladi</p>
             </div>
-            <div className="text-center p-6">
-              <div className="bg-primary-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-soft">
-                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center p-2">
+              <div className="bg-primary-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2 shadow-soft">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-text-primary mb-2">Tez Yetkazib Berish</h3>
-              <p className="text-sm text-text-secondary">Uzum Market orqali tez va xavfsiz</p>
+              <h3 className="text-sm md:text-lg font-semibold text-text-primary mb-1 md:mb-2">Tez Yetkazib Berish</h3>
+              <p className="text-xs md:text-sm text-text-secondary hidden md:block">Uzum Market orqali tez va xavfsiz</p>
             </div>
-            <div className="text-center p-6">
-              <div className="bg-gold-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-soft">
-                <svg className="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center p-2">
+              <div className="bg-gold-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2 shadow-soft">
+                <svg className="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-text-primary mb-2">Noyob Dizayn</h3>
-              <p className="text-sm text-text-secondary">Maxsus buyurtma va individual dizayn</p>
+              <h3 className="text-sm md:text-lg font-semibold text-text-primary mb-1 md:mb-2">Noyob Dizayn</h3>
+              <p className="text-xs md:text-sm text-text-secondary hidden md:block">Maxsus buyurtma va individual dizayn</p>
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@ function Home() {
               <p className="text-base text-text-secondary">Admin paneldan mahsulot qo'shing va "Is Featured" belgilang</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
               {featuredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
