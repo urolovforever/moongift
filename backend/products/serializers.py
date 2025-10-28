@@ -27,7 +27,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['id', 'name', 'slug', 'category', 'category_name', 'description', 'price',
-                  'material', 'dimensions', 'image', 'image_2', 'image_3', 'uzum_link', 'yandex_market_link',
+                  'image', 'image_2', 'image_3', 'uzum_link', 'yandex_market_link',
                   'discount_percentage', 'is_featured', 'created_at', 'similar_products']
     
     def get_similar_products(self, obj):
