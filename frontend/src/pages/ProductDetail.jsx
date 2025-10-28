@@ -69,14 +69,35 @@ function ProductDetail() {
           ) : (
             <p className="text-4xl font-bold text-accent mb-6">{formatPrice(product.price)} so'm</p>
           )}
-          <p className="text-lg text-text-secondary mb-8 leading-relaxed">{product.description}</p>
+          <p className="text-lg text-text-secondary mb-6 leading-relaxed">{product.description}</p>
+
+          {(product.material || product.dimensions) && (
+            <div className="bg-surface-light rounded-lg p-4 mb-8 border border-border-light">
+              <h3 className="text-sm font-bold text-text-primary mb-3 uppercase">Mahsulot Xususiyatlari</h3>
+              <div className="space-y-2">
+                {product.material && (
+                  <div className="flex items-start">
+                    <span className="text-primary font-semibold mr-2">Material:</span>
+                    <span className="text-text-secondary">{product.material}</span>
+                  </div>
+                )}
+                {product.dimensions && (
+                  <div className="flex items-start">
+                    <span className="text-primary font-semibold mr-2">O'lcham:</span>
+                    <span className="text-text-secondary">{product.dimensions}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           <div className="space-y-3">
             <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-primary text-white text-center py-4 rounded-button font-semibold text-lg hover:bg-primary-700 transition-colors shadow-soft-md">
               Buyurtma berish (Uzum Market)
             </a>
             {product.yandex_market_link && (
-              <a href={product.yandex_market_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-surface-gray text-text-primary text-center py-4 rounded-button font-semibold text-lg hover:bg-border transition-colors shadow-soft border border-light">
-                Batafsil ko'rish (Yandex Market)
+              <a href={product.yandex_market_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-accent text-white text-center py-4 rounded-button font-semibold text-lg hover:bg-accent/80 transition-colors shadow-soft-md">
+                Buyurtma berish (Yandex Market)
               </a>
             )}
           </div>

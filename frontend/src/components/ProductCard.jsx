@@ -24,9 +24,9 @@ function ProductCard({ product }) {
           <h3 className="text-lg font-semibold text-primary mb-2 hover:text-primary-700 transition-colors">{product.name}</h3>
         </Link>
         {product.discount_percentage > 0 ? (
-          <div className="mb-4">
-            <p className="text-sm text-text-secondary line-through">{formatPrice(product.price)} so'm</p>
+          <div className="mb-4 flex items-center gap-2">
             <p className="text-2xl font-bold text-accent">{formatPrice(product.price * (1 - product.discount_percentage / 100))} so'm</p>
+            <p className="text-sm text-text-secondary line-through">{formatPrice(product.price)}</p>
           </div>
         ) : (
           <p className="text-2xl font-bold text-accent mb-4">{formatPrice(product.price)} so'm</p>
