@@ -33,7 +33,12 @@ function ProductCard({ product }) {
             </div>
           </div>
         ) : (
-          <p className="text-2xl font-bold text-accent mb-4">{formatPrice(product.price)} so'm</p>
+          <div className="mb-4">
+            <div className="flex items-baseline gap-2 mb-1">
+              <p className="text-2xl font-bold text-accent">{formatPrice(product.price)} so'm</p>
+            </div>
+            <div className="h-5"></div>
+          </div>
         )}
         <div className="space-y-2">
           <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-primary text-white py-2.5 px-4 rounded-button hover:bg-primary-700 transition-colors text-center font-semibold text-sm shadow-soft">
