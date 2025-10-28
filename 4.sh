@@ -1,3 +1,31 @@
+#!/bin/bash
+
+echo "🔧 CORS muammosini hal qilish..."
+
+# ==========================================
+# 1. Backend serverini tekshirish
+# ==========================================
+echo "📡 Backend serverini tekshirish..."
+if curl -s http://localhost:8000/api/products/ > /dev/null; then
+    echo "✅ Backend server ishlayapti!"
+else
+    echo "❌ Backend server ishlamayapti!"
+    echo ""
+    echo "Backend'ni ishga tushiring:"
+    echo "  cd ~/PycharmProjects/moon/backend"
+    echo "  source venv/bin/activate"
+    echo "  python manage.py runserver"
+    exit 1
+fi
+
+# ==========================================
+# 2. Backend CORS sozlamalarini yangilash
+# ==========================================
+cd ~/PycharmProjects/moon/backend
+
+echo "⚙️  CORS sozlamalarini yangilash..."
+
+cat > core/settings.py << 'EOF'
 from pathlib import Path
 from decouple import config
 
@@ -185,3 +213,38 @@ JAZZMIN_UI_TWEAKS = {
     "theme": "flatly",
     "dark_mode_theme": "darkly",
 }
+EOF
+
+echo "✅ settings.py yangilandi!"
+
+# ==========================================
+# 3. django-cors-headers o'rnatilganligini tekshirish
+# ==========================================
+echo "📦 django-cors-headers tekshirilmoqda..."
+cd ~/PycharmProjects/moon/backend
+source venv/bin/activate
+
+if python -c "import corsheaders" 2>/dev/null; then
+    echo "✅ django-cors-headers o'rnatilgan!"
+else
+    echo "📥 django-cors-headers o'rnatilmoqda..."
+    pip install django-cors-headers
+fi
+
+echo ""
+echo "✅ CORS sozlamalari to'g'rilandi!"
+echo ""
+echo "📋 Keyingi qadamlar:"
+echo ""
+echo "1️⃣  Backend serverni QAYTA ishga tushiring:"
+echo "    cd ~/PycharmProjects/moon/backend"
+echo "    source venv/bin/activate"
+echo "    python manage.py runserver"
+echo ""
+echo "2️⃣  Frontend'ni yangilang:"
+echo "    Ctrl+Shift+R (hard reload)"
+echo ""
+echo "3️⃣  API'ni test qiling:"
+echo "    curl http://localhost:8000/api/products/"
+echo ""
+echo "⚠️  MUHIM: Backend serverni to'xtatib, qayta ishga tushiring!"
