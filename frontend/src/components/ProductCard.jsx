@@ -19,7 +19,6 @@ function ProductCard({ product }) {
         </div>
       </Link>
       <div className="p-5">
-        <p className="text-xs text-primary uppercase tracking-wide mb-2 font-semibold">{product.category_name}</p>
         <Link to={`/products/${product.slug}`}>
           <h3 className="text-lg font-semibold text-primary mb-2 hover:text-primary-700 transition-colors">{product.name}</h3>
         </Link>
@@ -40,13 +39,19 @@ function ProductCard({ product }) {
             <div className="h-5"></div>
           </div>
         )}
-        <div className="space-y-2">
-          <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-primary text-white py-2.5 px-4 rounded-button hover:bg-primary-700 transition-colors text-center font-semibold text-sm shadow-soft">
-            Uzum Market
+        <div className={`flex ${product.yandex_market_link ? 'gap-2' : ''}`}>
+          <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className={`${product.yandex_market_link ? 'flex-1' : 'w-full'} bg-primary text-white py-2 px-3 rounded-button hover:bg-primary-700 transition-colors flex items-center justify-center gap-1.5 font-semibold text-xs shadow-soft`}>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span>Uzum</span>
           </a>
           {product.yandex_market_link && (
-            <a href={product.yandex_market_link} target="_blank" rel="noopener noreferrer" className="block w-full bg-accent text-white py-2.5 px-4 rounded-button hover:bg-accent/80 transition-colors text-center font-semibold text-sm shadow-soft">
-              Yandex Market
+            <a href={product.yandex_market_link} target="_blank" rel="noopener noreferrer" className="flex-1 bg-accent text-white py-2 px-3 rounded-button hover:bg-accent/80 transition-colors flex items-center justify-center gap-1.5 font-semibold text-xs shadow-soft">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <span>Yandex</span>
             </a>
           )}
         </div>
