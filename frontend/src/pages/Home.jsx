@@ -26,11 +26,20 @@ function Home() {
 
   return (
     <div>
+      {/* Banner section - Navbar ostida ko'rsatiladigan banner */}
+      <section className="relative w-full">
+        <img
+          src="/banner.jpg"
+          alt="MoonGift Banner"
+          className="w-full h-48 md:h-64 lg:h-80 object-cover"
+        />
+      </section>
+
       <section className="relative bg-gradient-to-br from-primary via-primary-600 to-primary-700 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-5">
-              🌙 MoonGift
+              MoonGift
             </h1>
             <p className="text-xl md:text-2xl text-white/95 mb-5">
               Lazer texnologiyasi bilan yaratilgan noyob mahsulotlar

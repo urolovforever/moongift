@@ -17,8 +17,9 @@ function Navbar() {
     <nav className="bg-white shadow-soft-lg sticky top-0 z-50 border-b-2 border-border-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20 py-4">
-          <Link to="/" className="flex items-center">
-            <span className="text-4xl font-bold text-primary tracking-tight">🌙 MoonGift</span>
+          <Link to="/" className="flex items-center gap-3">
+            <img src="/logo.png" alt="MoonGift Logo" className="h-12 w-12 object-contain" />
+            <span className="text-4xl font-bold text-primary tracking-tight">MoonGift</span>
           </Link>
 
           <div className="hidden md:flex space-x-12">
