@@ -16,17 +16,17 @@ function Navbar() {
   return (
     <nav className="bg-white shadow-soft-lg sticky top-0 z-50 border-b-2 border-border-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-18">
+        <div className="flex justify-between items-center h-20 py-4">
           <Link to="/" className="flex items-center">
-            <span className="text-3xl font-bold text-primary tracking-tight">🌙 MoonGift</span>
+            <span className="text-4xl font-bold text-primary tracking-tight">🌙 MoonGift</span>
           </Link>
 
-          <div className="hidden md:flex space-x-10">
+          <div className="hidden md:flex space-x-12">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`transition-colors text-base font-semibold ${
+                className={`transition-colors text-lg font-semibold ${
                   isActive(link.path) ? 'text-accent' : 'text-text-primary hover:text-accent'
                 }`}
               >
