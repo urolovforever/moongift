@@ -75,10 +75,10 @@ python manage.py runserver
 ✅ Backend endi **http://localhost:8000** da ishlaydi!
 
 #### API Endpoints:
-- `GET /api/products/` - Barcha mahsulotlar
+- `GET /api/products/` - Barcha mahsulotlar (filter, search, ordering)
 - `GET /api/products/featured/` - Mashhur mahsulotlar
 - `GET /api/products/{slug}/` - Bitta mahsulot
-- `GET /api/products/categories/` - Kategoriyalar
+- `GET /api/categories/` - Kategoriyalar
 - `POST /api/contact/` - Murojat yuborish
 
 #### Admin Panel:
@@ -184,10 +184,10 @@ moongift/
    - Kategoriya: tanlang
    - Tavsif: batafsil tavsif yozing
    - Narx: 150000
-   - Material: "Qayin yog'ochi"
-   - O'lcham: "30x20x2 sm"
-   - Rasm: yuklang
-   - Uzum Link: `https://uzum.uz/...`
+   - Discount Percentage: 0-100 oralig'ida (chegirma foizi)
+   - Rasm: yuklang (asosiy va 2 ta qo'shimcha)
+   - Uzum Market Link: `https://uzum.uz/...`
+   - Yandex Market Link: `https://market.yandex.uz/...` (ixtiyoriy)
    - Is Featured: ✅ (asosiy sahifada ko'rsatish uchun)
    - Is Active: ✅
 4. Save tugmasini bosing
@@ -239,10 +239,21 @@ curl -X POST http://localhost:8000/api/contact/ \
 
 ## 🎨 Dizayn
 
-- **Rang palitrasi:** Yog'och jigarrang tonlar
-- **Font:** Inter
+- **Rang palitrasi:**
+  - Primary (Ko'k): #2C5BA5
+  - Accent (Qizil): #DC3545
+  - Gold (Oltin): #DAA520
+  - Surface ranglar va soft shadows
+- **Font:** System fonts (optimizatsiya uchun)
 - **UI Framework:** TailwindCSS
 - **Responsive:** Mobil, Planshet, Desktop
+- **Features:**
+  - Logo support (navbar va footer)
+  - Hero background image
+  - Discount badges
+  - Cart icons on marketplace buttons
+  - Mobile-first design
+  - Back navigation button
 
 ---
 
@@ -282,6 +293,15 @@ curl http://localhost:8000/api/products/
 
 ## 📦 Production Deploy
 
+### Rasmlarni Qo'shish (Deploy'dan oldin)
+1. **Logo** (`frontend/public/logo.png`)
+   - Tavsiya: 200x200px, PNG format, shaffof fon
+   - Ko'rinadi: Navbar va Footer'da
+
+2. **Hero Background** (`frontend/public/hero-bg.jpg`)
+   - Tavsiya: 1920x800px yoki kattaroq
+   - Ko'rinadi: Bosh sahifada matn orqasida
+
 ### Backend (Railway/Render)
 1. PostgreSQL database yarating
 2. Environment variables:
@@ -290,15 +310,19 @@ curl http://localhost:8000/api/products/
    DEBUG=False
    ALLOWED_HOSTS=yourdomain.com
    DATABASE_URL=postgresql://...
+   CORS_ALLOWED_ORIGINS=https://moongift.uz
    ```
 3. `python manage.py collectstatic`
+4. `python manage.py migrate`
 
 ### Frontend (Vercel/Netlify)
-1. `npm run build`
-2. Environment variables:
+1. Rasmlarni qo'shib bo'lgandan keyin build qiling
+2. `npm run build`
+3. Environment variables:
    ```
    VITE_API_URL=https://api.yourdomain.com
    ```
+4. Deploy `dist/` papkani
 
 ---
 
