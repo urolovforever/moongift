@@ -21,7 +21,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['image_preview', 'name', 'category', 'formatted_price', 'discount_badge', 'is_featured', 'is_active', 'created_at']
     list_filter = ['category', 'is_featured', 'is_active', 'created_at']
-    search_fields = ['name', 'description', 'material']
+    search_fields = ['name', 'description']
     prepopulated_fields = {'slug': ('name',)}
     list_editable = ['is_featured', 'is_active']
     list_per_page = 20
@@ -32,8 +32,8 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('name', 'slug', 'category', 'description'),
             'classes': ('wide',)
         }),
-        ('💰 Narx va O\'lchamlar', {
-            'fields': ('price', 'material', 'dimensions'),
+        ('💰 Narx', {
+            'fields': ('price',),
             'classes': ('wide',)
         }),
         ('🏷️ Chegirma', {
