@@ -27,8 +27,6 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', verbose_name="Kategoriya")
     description = models.TextField(verbose_name="Tavsif")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Narx (so'm)")
-    material = models.CharField(max_length=100, blank=True, verbose_name="Material")
-    dimensions = models.CharField(max_length=100, blank=True, verbose_name="O'lcham")
     image = models.ImageField(upload_to='products/', verbose_name="Asosiy rasm")
     image_2 = models.ImageField(upload_to='products/', blank=True, null=True, verbose_name="Rasm 2")
     image_3 = models.ImageField(upload_to='products/', blank=True, null=True, verbose_name="Rasm 3")
