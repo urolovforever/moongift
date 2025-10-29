@@ -21,41 +21,26 @@ class ProductListView(generics.ListAPIView):
     def get_queryset(self):
         queryset = Product.objects.filter(is_active=True)
 
-        # Debug: Parametrlarni chiqarish
-        print("=" * 50)
-        print("API Query Params:", dict(self.request.query_params))
-        print("=" * 50)
-
         # Kategoriya filter (slug bo'yicha)
         category = self.request.query_params.get('category', None)
         if category:
-            print(f"Category filter: {category}")
-            # Avval slug bo'yicha
             queryset = queryset.filter(category__slug=category)
-            print(f"After category filter: {queryset.count()} mahsulot")
 
         # Narx oralig'i filter
         min_price = self.request.query_params.get('min_price', None)
         max_price = self.request.query_params.get('max_price', None)
 
         if min_price:
-            print(f"Min price filter: {min_price}")
             try:
                 queryset = queryset.filter(price__gte=float(min_price))
-                print(f"After min_price filter: {queryset.count()} mahsulot")
             except ValueError:
-                print(f"Invalid min_price: {min_price}")
+                pass  # Invalid min_price, ignore
 
         if max_price:
-            print(f"Max price filter: {max_price}")
             try:
                 queryset = queryset.filter(price__lte=float(max_price))
-                print(f"After max_price filter: {queryset.count()} mahsulot")
             except ValueError:
-                print(f"Invalid max_price: {max_price}")
-
-        print(f"Final queryset: {queryset.count()} mahsulot")
-        print("=" * 50)
+                pass  # Invalid max_price, ignore
 
         return queryset
 

@@ -1,7 +1,5 @@
 from pathlib import Path
 from decouple import config
-import dj_database_url
-import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -10,15 +8,18 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=lambda v: [s.strip() for s in v.split(',')])
 
 INSTALLED_APPS = [
-    'jazzmin',
+    'jazzmin',  # Admin panel dizayni (django.contrib.admin dan oldin!)
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'rest_framework',
-    'corsheaders',  # CORS support
+    'corsheaders',
+    
     'products',
     'contact',
 ]
@@ -26,7 +27,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # CORS - boshida bo'lishi kerak!
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -55,13 +56,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-# Database configuration
 DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',  # Development uchun SQLite
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -85,41 +84,13 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ==========================================
-# CORS SOZLAMALARI (MUHIM!)
-# ==========================================
-# Development uchun barcha originlarga ruxsat berish
-CORS_ALLOW_ALL_ORIGINS = True  # Faqat development uchun!
-
-# Yoki aniq originlar ro'yxati (production uchun)
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173",
-#     "http://localhost:3000",
-#     "http://127.0.0.1:5173",
-# ]
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:5173",
+]
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
 
-# REST Framework
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 12,
@@ -130,27 +101,44 @@ REST_FRAMEWORK = {
 # JAZZMIN SOZLAMALARI
 # ==========================================
 JAZZMIN_SETTINGS = {
+    # Title
     "site_title": "MoonGift Admin",
     "site_header": "MoonGift Boshqaruv Paneli",
     "site_brand": "🌙 MoonGift",
     "welcome_sign": "MoonGift Admin Paneliga Xush Kelibsiz",
     "copyright": "MoonGift 2025",
-    "site_logo": None,
+    
+    # Logo
+    "site_logo": None,  # Yoki "/static/logo.png"
     "login_logo": None,
     "site_logo_classes": "img-circle",
+    
+    # Icons (Font Awesome 5)
     "site_icon": None,
+    
+    # Top Menu
     "topmenu_links": [
         {"name": "Bosh Sahifa", "url": "admin:index", "permissions": ["auth.view_user"]},
         {"name": "Saytni Ko'rish", "url": "http://localhost:5173", "new_window": True},
         {"model": "products.Product"},
         {"model": "products.Category"},
     ],
-    "usermenu_links": [{"model": "auth.user"}],
+    
+    # User Menu
+    "usermenu_links": [
+        {"model": "auth.user"}
+    ],
+    
+    # Side Menu
     "show_sidebar": True,
     "navigation_expanded": True,
     "hide_apps": [],
     "hide_models": [],
+    
+    # Order
     "order_with_respect_to": ["products", "contact", "auth"],
+    
+    # Icons (Font Awesome 5)
     "icons": {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
@@ -159,11 +147,21 @@ JAZZMIN_SETTINGS = {
         "products.Product": "fas fa-box",
         "contact.ContactMessage": "fas fa-envelope",
     },
+    
+    # Default Icons
     "default_icon_parents": "fas fa-chevron-circle-right",
     "default_icon_children": "fas fa-circle",
+    
+    # UI Tweaks
     "show_ui_builder": False,
     "changeform_format": "horizontal_tabs",
-    "theme": "flatly",
+    "changeform_format_overrides": {
+        "auth.user": "collapsible",
+        "auth.group": "vertical_tabs"
+    },
+    
+    # Theme
+    "theme": "flatly",  # bootstrap themes: cerulean, cosmo, flatly, journal, litera, lumen, lux, materia, minty, pulse, sandstone, simplex, slate, solar, spacelab, superhero, united, yeti
 }
 
 JAZZMIN_UI_TWEAKS = {
@@ -188,4 +186,77 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_flat_style": False,
     "theme": "flatly",
     "dark_mode_theme": "darkly",
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
+}
+
+# ==========================================
+# LOGGING SOZLAMALARI
+# ==========================================
+# Faqat errorlarni ko'rsatish, HTTP request loglarni butunlay o'chirish
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+            'level': 'ERROR',  # Console'ga faqat ERROR yuboriladi
+        },
+        'null': {
+            'class': 'logging.NullHandler',  # Hech narsa chiqarmaydi
+        },
+    },
+    'loggers': {
+        # Django server HTTP loglarni butunlay o'chirish
+        'django.server': {
+            'handlers': ['null'],  # Null handler - hech narsa chiqarmaydi
+            'level': 'CRITICAL',
+            'propagate': False,
+        },
+        # Django umumiy loglar - faqat errorlar
+        'django': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        # Django request loglarni o'chirish
+        'django.request': {
+            'handlers': ['null'],
+            'level': 'CRITICAL',
+            'propagate': False,
+        },
+        # App loglar - faqat errorlar
+        'products': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'contact': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+    # Root logger
+    'root': {
+        'handlers': ['console'],
+        'level': 'ERROR',  # Faqat errorlar
+    },
 }
