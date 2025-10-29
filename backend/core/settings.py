@@ -195,3 +195,55 @@ JAZZMIN_UI_TWEAKS = {
         "success": "btn-success"
     }
 }
+
+# ==========================================
+# LOGGING SOZLAMALARI
+# ==========================================
+# Faqat errorlarni ko'rsatish, oddiy request loglarni yo'qotish
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        # Django server loglarni o'chirish (200 OK, 304 Not Modified va h.k)
+        'django.server': {
+            'handlers': ['console'],
+            'level': 'ERROR',  # Faqat errorlarni ko'rsatish
+            'propagate': False,
+        },
+        # Django umumiy loglar
+        'django': {
+            'handlers': ['console'],
+            'level': 'WARNING',  # WARNING va yuqori (ERROR, CRITICAL)
+        },
+        # Sizning app loglaringiz
+        'products': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+        },
+        'contact': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+        },
+    },
+    # Root logger - hamma uchun default
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+}
