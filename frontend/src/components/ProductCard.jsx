@@ -72,18 +72,18 @@ function ProductCard({ product }) {
           </div>
         )}
 
-        {/* Tugmalar - mobilda yonma-yon */}
-        <div className="flex gap-2">
+        {/* Tugmalar - mobilda yonma-yon, kichik va sig'digan */}
+        <div className="flex gap-1.5">
           <a
             href={product.uzum_link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${product.yandex_market_link ? 'flex-1' : 'w-full'} bg-purple-600 hover:bg-purple-700 text-white py-2 px-3 rounded-xl transition-all duration-200 hover:shadow-lg flex items-center justify-center gap-1.5 font-medium text-sm`}
+            className={`${product.yandex_market_link ? 'flex-1' : 'w-full'} bg-purple-600 hover:bg-purple-700 text-white py-1.5 px-2 rounded-lg transition-all duration-200 hover:shadow-lg flex items-center justify-center gap-1 font-medium text-xs`}
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
-            <span>Uzum</span>
+            <span className="whitespace-nowrap">Uzum</span>
           </a>
 
           {product.yandex_market_link && (
@@ -91,12 +91,12 @@ function ProductCard({ product }) {
               href={product.yandex_market_link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-3 rounded-xl transition-all duration-200 hover:shadow-lg flex items-center justify-center gap-1.5 font-medium text-sm"
+              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-1.5 px-2 rounded-lg transition-all duration-200 hover:shadow-lg flex items-center justify-center gap-1 font-medium text-xs"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
-              <span>Yandex</span>
+              <span className="whitespace-nowrap">Yandex</span>
             </a>
           )}
         </div>
