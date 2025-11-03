@@ -15,7 +15,7 @@ class ProductListView(generics.ListAPIView):
     """Mahsulotlar ro'yxati - filter, qidiruv va ordering bilan"""
     serializer_class = ProductListSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['name', 'description', 'material']
+    search_fields = ['name', 'description']
     ordering_fields = ['price', 'name', 'created_at']
     ordering = ['-created_at']
 
