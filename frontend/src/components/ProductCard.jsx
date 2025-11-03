@@ -59,11 +59,20 @@ function ProductCard({ product }) {
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        <img
-          src={images[currentImageIndex]}
-          alt={product.name}
-          className="w-full h-full object-cover transition-opacity duration-300"
-        />
+        {/* Slide transitions bilan carousel */}
+        <div
+          className="flex transition-transform duration-500 ease-out h-full"
+          style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+        >
+          {images.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`${product.name} - ${index + 1}`}
+              className="w-full h-full object-cover flex-shrink-0"
+            />
+          ))}
+        </div>
 
         {/* Rasm indicator dots - faqat ko'p rasm bo'lsa */}
         {images.length > 1 && (
