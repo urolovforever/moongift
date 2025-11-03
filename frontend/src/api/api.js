@@ -1,11 +1,25 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+// VITE_API_URL environment variable'dan foydalaning
+// Agar u mavjud bo'lmasa, localhost ishlatiladi (development uchun)
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: { 'Content-Type': 'application/json' },
+  baseURL: `${API_BASE_URL}/api`,  // /api qo'shildi
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  withCredentials: true,  // CORS uchun
 });
+
+// Response interceptor - xatolarni ko'rish uchun
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.error('API Error:', error.response || error);
+    return Promise.reject(error);
+  }
+);
 
 export const getCategories = () => api.get('/products/categories/');
 export const getProducts = (params = {}) => api.get('/products/', { params });
