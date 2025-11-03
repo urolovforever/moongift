@@ -25,23 +25,21 @@ function ProductCard({ product }) {
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
 
-          {/* Badges Container - yuqori chap burchakda */}
-          <div className="absolute top-2 left-2 flex flex-col gap-1.5">
-            {/* Chegirma Badge - faqat 5% dan ko'p bo'lsa */}
-            {discountBadgeClass && (
-              <span className={`${discountBadgeClass} text-xs px-2 py-1 rounded-lg font-bold shadow-lg backdrop-blur-sm`}>
-                -{product.discount_percentage}%
-              </span>
-            )}
+          {/* Badges Container */}
+          {/* Chegirma Badge - yuqori chap */}
+          {discountBadgeClass && (
+            <span className={`absolute top-2 left-2 ${discountBadgeClass} text-xs px-2 py-1 rounded-lg font-bold shadow-lg backdrop-blur-sm`}>
+              -{product.discount_percentage}%
+            </span>
+          )}
 
-            {/* Mashhur Badge - chegirma badge ostida */}
-            {product.is_featured && (
-              <span className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white text-xs px-2 py-1 rounded-lg font-semibold shadow-lg backdrop-blur-sm flex items-center gap-1">
-                <span>⭐</span>
-                <span>TOP</span>
-              </span>
-            )}
-          </div>
+          {/* TOP Badge - yuqori o'ng */}
+          {product.is_featured && (
+            <span className="absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-amber-500 text-white text-xs px-2 py-1 rounded-lg font-semibold shadow-lg backdrop-blur-sm flex items-center gap-1">
+              <span>⭐</span>
+              <span>TOP</span>
+            </span>
+          )}
         </div>
       </Link>
 
@@ -51,6 +49,13 @@ function ProductCard({ product }) {
             {product.name}
           </h3>
         </Link>
+
+        {/* Tavsif - faqat 1 qator */}
+        {product.description && (
+          <p className="text-xs text-gray-500 line-clamp-1 my-1 font-normal">
+            {product.description}
+          </p>
+        )}
 
         {/* Narx */}
         {product.discount_percentage >= 5 ? (
@@ -73,32 +78,48 @@ function ProductCard({ product }) {
         )}
 
         {/* Tugmalar - mobilda yonma-yon, kichik va sig'digan */}
-        <div className="flex gap-1.5">
-          <a
-            href={product.uzum_link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${product.yandex_market_link ? 'flex-1' : 'w-full'} bg-purple-600 hover:bg-purple-700 text-white py-1.5 px-2 rounded-lg transition-all duration-200 hover:shadow-lg flex items-center justify-center gap-1 font-medium text-xs`}
-          >
-            <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-            </svg>
-            <span className="whitespace-nowrap">Uzum</span>
-          </a>
-
-          {product.yandex_market_link && (
+        <div className="space-y-1.5">
+          {/* Uzum va Yandex tugmalari */}
+          <div className="flex gap-1.5">
             <a
-              href={product.yandex_market_link}
+              href={product.uzum_link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-1.5 px-2 rounded-lg transition-all duration-200 hover:shadow-lg flex items-center justify-center gap-1 font-medium text-xs"
+              className={`${product.yandex_market_link ? 'flex-1' : 'w-full'} bg-purple-600 hover:bg-purple-700 text-white py-1.5 px-2 rounded-lg transition-all duration-200 hover:shadow-lg flex items-center justify-center gap-1 font-medium text-xs`}
             >
               <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
-              <span className="whitespace-nowrap">Yandex</span>
+              <span className="whitespace-nowrap">Uzum</span>
             </a>
-          )}
+
+            {product.yandex_market_link && (
+              <a
+                href={product.yandex_market_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-1.5 px-2 rounded-lg transition-all duration-200 hover:shadow-lg flex items-center justify-center gap-1 font-medium text-xs"
+              >
+                <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <span className="whitespace-nowrap">Yandex</span>
+              </a>
+            )}
+          </div>
+
+          {/* Ism yozdirish tugmasi - Telegram */}
+          <a
+            href="https://t.me/moongift_operator"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white py-1.5 px-2 rounded-lg transition-all duration-200 hover:shadow-lg flex items-center justify-center gap-1 font-medium text-xs"
+          >
+            <svg className="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.053 5.56-5.023c.242-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+            </svg>
+            <span className="whitespace-nowrap">Ism yozdirish</span>
+          </a>
         </div>
       </div>
     </div>
