@@ -1,8 +1,9 @@
-from rest_framework import generics, filters
+from rest_framework import generics, filters, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAdminUser
 from .models import Category, Product
-from .serializers import CategorySerializer, ProductListSerializer, ProductDetailSerializer
+from .serializers import CategorySerializer, ProductListSerializer, ProductDetailSerializer, ProductAdminSerializer
 
 
 class CategoryListView(generics.ListAPIView):
@@ -56,3 +57,51 @@ class FeaturedProductsView(APIView):
         products = Product.objects.filter(is_active=True, is_featured=True)[:4]
         serializer = ProductListSerializer(products, many=True, context={'request': request})
         return Response(serializer.data)
+
+
+# ==========================================
+# ADMIN VIEWS - Faqat admin uchun
+# ==========================================
+
+class AdminProductListView(generics.ListAPIView):
+    """Admin uchun barcha mahsulotlar ro'yxati (faol va nofaol)"""
+    permission_classes = [IsAdminUser]
+    serializer_class = ProductAdminSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['name', 'description']
+    ordering_fields = ['price', 'name', 'created_at']
+    ordering = ['-created_at']
+
+    def get_queryset(self):
+        return Product.objects.all()
+
+
+class AdminProductCreateView(generics.CreateAPIView):
+    """Admin uchun yangi mahsulot qo'shish"""
+    permission_classes = [IsAdminUser]
+    serializer_class = ProductAdminSerializer
+    queryset = Product.objects.all()
+
+
+class AdminProductUpdateView(generics.UpdateAPIView):
+    """Admin uchun mahsulotni tahrirlash"""
+    permission_classes = [IsAdminUser]
+    serializer_class = ProductAdminSerializer
+    queryset = Product.objects.all()
+    lookup_field = 'id'
+
+
+class AdminProductDeleteView(generics.DestroyAPIView):
+    """Admin uchun mahsulotni o'chirish"""
+    permission_classes = [IsAdminUser]
+    queryset = Product.objects.all()
+    lookup_field = 'id'
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        product_name = instance.name
+        self.perform_destroy(instance)
+        return Response(
+            {'message': f'Mahsulot "{product_name}" muvaffaqiyatli o\'chirildi'},
+            status=status.HTTP_200_OK
+        )
