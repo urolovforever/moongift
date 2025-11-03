@@ -24,6 +24,11 @@ services:
           name: moongift-db
           property: connectionString
 
+      - key: TELEGRAM_BOT_TOKEN
+        value: 8586781954:AAHfm5_GIaJekEeZNiE_YbL1HLBXyrbtx7I
+      - key: TELEGRAM_CHAT_ID
+        value: 1920079641
+
   # Frontend Web Service (React/Vite)
   - type: web
     name: moongift-frontend
@@ -47,3 +52,5 @@ databases:
     user: moongift
     plan: free
     region: frankfurt
+
+
