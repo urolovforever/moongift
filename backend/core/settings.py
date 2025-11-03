@@ -29,6 +29,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'core.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -92,12 +93,21 @@ TIME_ZONE = 'Asia/Tashkent'
 USE_I18N = True
 USE_TZ = True
 
+# Static files
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# WhiteNoise configuration
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_AUTOREFRESH = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# WhiteNoise uchun media papkani qo'shish
+WHITENOISE_ROOT = MEDIA_ROOT
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -106,7 +116,30 @@ CORS_ALLOWED_ORIGINS = config(
     default='http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173,https://moongift-frontend.onrender.com',
     cast=lambda v: [s.strip() for s in v.split(',')]
 )
+
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = False  # Production uchun False
+
+# Media fayllar uchun
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnu',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+CORS_EXPOSE_HEADERS = [
+    'Content-Type',
+    'X-CSRFToken',
+]
+
+# Security headers
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 
 REST_FRAMEWORK = {
