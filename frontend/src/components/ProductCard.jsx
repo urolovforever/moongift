@@ -1,7 +1,42 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 function ProductCard({ product }) {
   const formatPrice = (price) => new Intl.NumberFormat('uz-UZ').format(price);
+
+  // Rasmlar ro'yxati
+  const images = [product.image, product.image_2, product.image_3].filter(Boolean);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  // Swipe detection
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(0); // Reset
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      // O'ngga swipe - keyingi rasm
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    } else if (isRightSwipe) {
+      // Chapga swipe - oldingi rasm
+      setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    }
+  };
 
   // Chegirma badge rang va ko'rinishni aniqlash
   const getDiscountBadgeClass = () => {
@@ -17,13 +52,34 @@ function ProductCard({ product }) {
 
   return (
     <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
-      {/* Rasm - faqat ko'rish uchun, bosib detailga o'tmasin */}
-      <div className="relative overflow-hidden aspect-square">
+      {/* Rasm - swipe bilan aylanadi */}
+      <div
+        className="relative overflow-hidden aspect-[3/4]"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         <img
-          src={product.image}
+          src={images[currentImageIndex]}
           alt={product.name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-opacity duration-300"
         />
+
+        {/* Rasm indicator dots - faqat ko'p rasm bo'lsa */}
+        {images.length > 1 && (
+          <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1">
+            {images.map((_, index) => (
+              <div
+                key={index}
+                className={`w-1.5 h-1.5 rounded-full transition-all ${
+                  index === currentImageIndex
+                    ? 'bg-white w-3'
+                    : 'bg-white/50'
+                }`}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Badges Container */}
         {/* Chegirma Badge - yuqori chap */}
@@ -44,14 +100,14 @@ function ProductCard({ product }) {
 
       <div className="p-2.5 sm:p-4">
         <Link to={`/products/${product.slug}`}>
-          <h3 className="text-sm sm:text-base font-semibold text-gray-800 mb-1.5 sm:mb-2 hover:text-blue-600 transition-colors line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
+          <h3 className="text-sm sm:text-base font-semibold text-gray-800 mb-0.5 sm:mb-1 hover:text-blue-600 transition-colors line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
             {product.name}
           </h3>
         </Link>
 
-        {/* Tavsif - faqat 1 qator */}
+        {/* Tavsif - 2 qator */}
         {product.description && (
-          <p className="text-[10px] sm:text-xs text-gray-500 line-clamp-1 my-0.5 sm:my-1 font-normal">
+          <p className="text-[10px] sm:text-xs text-gray-500 line-clamp-2 mb-1.5 sm:mb-2 font-normal leading-snug">
             {product.description}
           </p>
         )}
