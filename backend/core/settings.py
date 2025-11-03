@@ -111,11 +111,12 @@ WHITENOISE_ROOT = MEDIA_ROOT
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = config(
-    'CORS_ALLOWED_ORIGINS',
-    default='http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173,https://moongift-frontend.onrender.com',
-    cast=lambda v: [s.strip() for s in v.split(',')]
-)
+
+CORS_ALLOWED_ORIGINS = [
+    "https://moongift-frontend.onrender.com",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = False  # Production uchun False
