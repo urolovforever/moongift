@@ -59,11 +59,20 @@ function ProductCard({ product }) {
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        <img
-          src={images[currentImageIndex]}
-          alt={product.name}
-          className="w-full h-full object-cover transition-opacity duration-300"
-        />
+        {/* Slide transitions bilan carousel */}
+        <div
+          className="flex transition-transform duration-500 ease-out h-full"
+          style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+        >
+          {images.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`${product.name} - ${index + 1}`}
+              className="w-full h-full object-cover flex-shrink-0"
+            />
+          ))}
+        </div>
 
         {/* Rasm indicator dots - faqat ko'p rasm bo'lsa */}
         {images.length > 1 && (
@@ -100,14 +109,14 @@ function ProductCard({ product }) {
 
       <div className="p-2.5 sm:p-4">
         <Link to={`/products/${product.slug}`}>
-          <h3 className="text-sm sm:text-base font-semibold text-gray-800 mb-0.5 sm:mb-1 hover:text-blue-600 transition-colors line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
+          <h3 className="text-sm sm:text-base font-semibold text-gray-800 mb-0 hover:text-blue-600 transition-colors line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
             {product.name}
           </h3>
         </Link>
 
         {/* Tavsif - 2 qator */}
         {product.description && (
-          <p className="text-[10px] sm:text-xs text-gray-500 line-clamp-2 mb-1.5 sm:mb-2 font-normal leading-snug">
+          <p className="text-[10px] sm:text-xs text-gray-500 line-clamp-2 mb-1.5 sm:mb-2 mt-0.5 font-normal leading-snug">
             {product.description}
           </p>
         )}
