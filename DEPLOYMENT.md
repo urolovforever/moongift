@@ -68,9 +68,20 @@ PYTHON_VERSION = 3.11.0
   - Static fayllar to'planadi
   - Database migratsiyalari bajariladi
 
-### 5. Admin Panel yaratish
+### 5. Admin Panel
 
-Deploy tugagach, superuser yaratish uchun:
+**Avtomatik yaratilgan superuser:**
+- Username: `admin`
+- Password: `admin123`
+- Email: `admin@example.com`
+
+**Admin Panel URL'lar:**
+- Django Admin: `https://moongift-backend.onrender.com/admin/`
+- Custom Admin Panel: `https://moongift-frontend.onrender.com/admin/login`
+
+**Yangi superuser yaratish:**
+
+Deploy tugagach, o'zingizning superuser'ingizni yaratish uchun:
 
 1. Render dashboard'da Web Service'ingizni oching
 2. "Shell" tab'ini bosing
