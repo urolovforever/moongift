@@ -1,9 +1,9 @@
 services:
-  # Backend Web Service
+  # Backend Web Service (Django)
   - type: web
     name: moongift-backend
     env: python
-    region: frankfurt  # yoki oregon
+    region: frankfurt
     plan: free
     branch: main
     buildCommand: "./build.sh"
@@ -24,10 +24,26 @@ services:
       - key: CORS_ALLOWED_ORIGINS
         sync: false
 
+  # Frontend Web Service (React/Vite)
+  - type: web
+    name: moongift-frontend
+    env: node
+    region: frankfurt
+    plan: free
+    branch: main
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm run preview -- --port 10000"
+    envVars:
+      - key: VITE_API_URL
+        value: https://moongift-backend.onrender.com
+      - key: NODE_VERSION
+        value: 20.10.0
+
 databases:
   # PostgreSQL Database
   - name: moongift-db
     databaseName: moongift
     user: moongift
     plan: free
-    region: frankfurt  # web service bilan bir xil region
+    region: frankfurt
