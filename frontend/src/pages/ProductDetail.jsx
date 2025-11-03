@@ -102,7 +102,7 @@ function ProductDetail() {
 
             {/* Ism yozdirish tugmasi - Telegram */}
             <a
-              href="https://t.me/moongift_operator"
+              href="https://t.me/moongift_uz"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-1.5 w-full bg-blue-500 text-white text-center py-2 md:py-4 rounded-lg font-semibold text-xs md:text-lg hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg"
