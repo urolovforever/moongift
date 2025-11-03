@@ -51,8 +51,8 @@ function ProductDetail() {
         <div>
           <div className="relative">
             <img src={selectedImage} alt={product.name} className="w-full h-48 md:h-96 object-cover rounded-card mb-2 md:mb-4 shadow-soft-md" />
-            {product.discount_percentage > 0 && (
-              <span className="absolute top-1 left-1 md:top-4 md:left-4 bg-accent text-white text-xs md:text-sm px-2 py-1 md:px-4 md:py-2 rounded-button font-bold shadow-soft-md">
+            {product.discount_percentage >= 5 && (
+              <span className={`absolute top-1 left-1 md:top-4 md:left-4 ${product.discount_percentage >= 15 ? 'bg-red-500' : 'bg-yellow-400 text-gray-900'} text-white text-xs md:text-sm px-2 py-1 md:px-4 md:py-2 rounded-lg font-bold shadow-lg`}>
                 -{product.discount_percentage}%
               </span>
             )}
@@ -83,17 +83,17 @@ function ProductDetail() {
           )}
           <p className="text-xs md:text-lg text-text-secondary mb-4 md:mb-8 leading-relaxed">{product.description}</p>
           <div className="space-y-2 md:space-y-3">
-            <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 w-full bg-primary text-white text-center py-2 md:py-4 rounded-button font-semibold text-xs md:text-lg hover:bg-primary-700 transition-colors shadow-soft-md">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            <a href={product.uzum_link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 w-full bg-purple-600 text-white text-center py-2 md:py-4 rounded-lg font-semibold text-xs md:text-lg hover:bg-purple-700 transition-colors shadow-md hover:shadow-lg">
+              <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
               <span className="hidden md:inline">Buyurtma berish (Uzum Market)</span>
               <span className="md:hidden">Uzum</span>
             </a>
             {product.yandex_market_link && (
-              <a href={product.yandex_market_link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 w-full bg-accent text-white text-center py-2 md:py-4 rounded-button font-semibold text-xs md:text-lg hover:bg-accent/80 transition-colors shadow-soft-md">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              <a href={product.yandex_market_link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 w-full bg-orange-500 text-white text-center py-2 md:py-4 rounded-lg font-semibold text-xs md:text-lg hover:bg-orange-600 transition-colors shadow-md hover:shadow-lg">
+                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
                 <span className="hidden md:inline">Buyurtma berish (Yandex Market)</span>
                 <span className="md:hidden">Yandex</span>
@@ -106,7 +106,7 @@ function ProductDetail() {
       {product.similar_products && product.similar_products.length > 0 && (
         <div className="mt-8 md:mt-16">
           <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-4 md:mb-8">O'xshash mahsulotlar</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {product.similar_products.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
