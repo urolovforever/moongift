@@ -6,7 +6,7 @@ services:
     region: frankfurt
     plan: free
     branch: main
-    buildCommand: "./build.sh"
+    buildCommand: "./build.sh"  # Bu yerda biz barcha migrate, collectstatic va superuserni bajaramiz
     startCommand: "cd backend && gunicorn core.wsgi:application"
     envVars:
       - key: SECRET_KEY
@@ -16,13 +16,13 @@ services:
       - key: PYTHON_VERSION
         value: 3.9.0
       - key: ALLOWED_HOSTS
-        sync: false
+        value: moongift-backend.onrender.com
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://moongift-frontend.onrender.com
       - key: DATABASE_URL
         fromDatabase:
           name: moongift-db
           property: connectionString
-      - key: CORS_ALLOWED_ORIGINS
-        sync: false
 
   # Frontend Web Service (React/Vite)
   - type: web
