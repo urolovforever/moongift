@@ -151,6 +151,13 @@ CORS_EXPOSE_HEADERS = [
     'X-CSRFToken',
 ]
 
+# CSRF Trusted Origins
+CSRF_TRUSTED_ORIGINS = [
+    "https://moongift-frontend.onrender.com",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
 # Security headers
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
@@ -159,6 +166,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 12,
     'DEFAULT_RENDERER_CLASSES': ['rest_framework.renderers.JSONRenderer'],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
 }
 
 # ==========================================
