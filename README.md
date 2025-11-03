@@ -164,33 +164,55 @@ moongift/
 
 ## 👨‍💼 Admin Panel Ishlatish
 
-### 1. Admin Panelga Kirish
+### Admin Panel Turlari
+
+**1. Django Admin (Backend):**
 - URL: http://localhost:8000/admin
-- Login: yaratgan `superuser` ma'lumotlari
+- Login: `admin` / `admin123` (default)
+- To'liq CRUD funksiyalari
 
-### 2. Kategoriya Qo'shish
-1. Admin panelda **Kategoriyalar** bo'limini oching
-2. "Add Category" tugmasini bosing
-3. To'ldiring:
-   - Nomi: "Stol bezaklari"
-   - Tavsif: "Maxsus tayyorlangan stol bezaklari"
-4. Save tugmasini bosing
+**2. Custom Admin Panel (Frontend - Yangi!):**
+- URL: http://localhost:5173/admin/login
+- Login: `admin` / `admin123` (default)
+- Zamonaviy interfeys
+- Mahsulotlarni tahrirlash va o'chirish
 
-### 3. Mahsulot Qo'shish
-1. Admin panelda **Mahsulotlar** bo'limini oching
-2. "Add Product" tugmasini bosing
-3. To'ldiring:
-   - Nomi: "Yog'ochdan tayyorlangan choy taxtasi"
-   - Kategoriya: tanlang
-   - Tavsif: batafsil tavsif yozing
-   - Narx: 150000
-   - Discount Percentage: 0-100 oralig'ida (chegirma foizi)
-   - Rasm: yuklang (asosiy va 2 ta qo'shimcha)
-   - Uzum Market Link: `https://uzum.uz/...`
-   - Yandex Market Link: `https://market.yandex.uz/...` (ixtiyoriy)
-   - Is Featured: ✅ (asosiy sahifada ko'rsatish uchun)
-   - Is Active: ✅
-4. Save tugmasini bosing
+### 1. Admin Panelga Kirish
+
+**Custom Admin Panel:**
+1. Brauzerda `http://localhost:5173/admin/login` ga o'ting
+2. Login: `admin`
+3. Parol: `admin123`
+4. "Kirish" tugmasini bosing
+
+### 2. Mahsulotlarni Boshqarish
+
+**Mahsulotni Tahrirlash:**
+1. Admin dashboard'da mahsulotlar jadvalini ko'rasiz
+2. Kerakli mahsulot qatorida "Tahrirlash" tugmasini bosing
+3. Modal oynada barcha maydonlarni o'zgartiring:
+   - Mahsulot nomi
+   - Kategoriya
+   - Tavsif
+   - Narx (so'm)
+   - Chegirma foizi (0-100%)
+   - Uzum link
+   - Yandex Market link
+   - Rasmlar (3 tagacha)
+   - Mashhur mahsulot belgisi
+   - Faol/Nofaol holati
+4. "Saqlash" tugmasini bosing
+
+**Mahsulotni O'chirish:**
+1. Mahsulot qatorida "O'chirish" tugmasini bosing
+2. Tasdiqlash dialogida "O'chirish" ni bosing
+3. Mahsulot darhol o'chiriladi
+
+### 3. Django Admin'da Mahsulot Qo'shish
+1. `http://localhost:8000/admin` ga o'ting
+2. **Mahsulotlar** bo'limini oching
+3. "Add Product" tugmasini bosing
+4. Barcha maydonlarni to'ldiring va "Save" bosing
 
 ---
 
