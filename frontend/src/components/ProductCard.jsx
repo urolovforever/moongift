@@ -9,6 +9,7 @@ function ProductCard({ product }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [isSwiping, setIsSwiping] = useState(false);
 
   // Swipe detection
   const minSwipeDistance = 50;
@@ -16,6 +17,7 @@ function ProductCard({ product }) {
   const onTouchStart = (e) => {
     setTouchEnd(0); // Reset
     setTouchStart(e.targetTouches[0].clientX);
+    setIsSwiping(false);
   };
 
   const onTouchMove = (e) => {
@@ -29,12 +31,22 @@ function ProductCard({ product }) {
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
 
-    if (isLeftSwipe) {
-      // O'ngga swipe - keyingi rasm
-      setCurrentImageIndex((prev) => (prev + 1) % images.length);
-    } else if (isRightSwipe) {
-      // Chapga swipe - oldingi rasm
-      setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    if (isLeftSwipe || isRightSwipe) {
+      setIsSwiping(true);
+      if (isLeftSwipe) {
+        // O'ngga swipe - keyingi rasm
+        setCurrentImageIndex((prev) => (prev + 1) % images.length);
+      } else if (isRightSwipe) {
+        // Chapga swipe - oldingi rasm
+        setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+      }
+    }
+  };
+
+  const handleImageClick = (e) => {
+    if (isSwiping) {
+      e.preventDefault();
+      setTimeout(() => setIsSwiping(false), 100);
     }
   };
 
@@ -52,27 +64,32 @@ function ProductCard({ product }) {
 
   return (
     <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
-      {/* Rasm - swipe bilan aylanadi */}
-      <div
-        className="relative overflow-hidden aspect-[3/4]"
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
+      {/* Rasm - swipe bilan aylanadi va bosilsa detailsga olib boradi */}
+      <Link
+        to={`/products/${product.slug}`}
+        onClick={handleImageClick}
+        className="block"
       >
-        {/* Slide transitions bilan carousel */}
         <div
-          className="flex transition-transform duration-500 ease-out h-full"
-          style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+          className="relative overflow-hidden aspect-[3/4]"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
         >
-          {images.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`${product.name} - ${index + 1}`}
-              className="w-full h-full object-cover flex-shrink-0"
-            />
-          ))}
-        </div>
+          {/* Slide transitions bilan carousel */}
+          <div
+            className="flex transition-transform duration-500 ease-out h-full"
+            style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+          >
+            {images.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`${product.name} - ${index + 1}`}
+                className="w-full h-full object-cover flex-shrink-0"
+              />
+            ))}
+          </div>
 
         {/* Rasm indicator dots - faqat ko'p rasm bo'lsa */}
         {images.length > 1 && (
@@ -105,7 +122,8 @@ function ProductCard({ product }) {
             <span>TOP</span>
           </span>
         )}
-      </div>
+        </div>
+      </Link>
 
       <div className="p-2.5 sm:p-4">
         <Link to={`/products/${product.slug}`}>
